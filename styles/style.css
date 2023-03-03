@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
 .calculator {
     width: 300px;
@@ -14,7 +14,42 @@
     background-color: #7e808b;
     box-shadow: 0px 10px 10px 1px #e1e1e1;
 }
-    
+
+.appTitle {
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.exitMessage{
+    width: 200px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #bec1dc;
+    font-family: 'Quicksand', sans-serif;
+    box-shadow: 0px 10px 0px 0px #7487a3;
+}
+
+.exit {
+    width: 20px;
+    height: 20px;
+    margin-top: 7px;
+    margin-left: 7px;
+    background: none;
+    color: #676a85;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+    border: none;;
+}
+
+.exit:hover{
+    color: #c4c7e7;   
+}
 
 .formText {
     width: 100%;
@@ -26,7 +61,7 @@
     border: none;
     color: white;
     font-size: 30px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -52,14 +87,14 @@
     border-style: solid;
     border-width: 0.5px;
     font-family: Verdana;
-    font-size: 20px;
+    font-size: 24px;
     background-color: #f4f1de;
     border-color: #e3e2d8;
-    font-family: 'Roboto', sans-serif;
-    color: #2c2d39;
+    font-family: 'Quicksand', sans-serif;
+    color: #323441;
 }
 
-.zerobutton {
+.zeroButton {
     width: 150px;
     border-radius: 0px 0px 0px 10px;
 }
@@ -68,8 +103,8 @@
     border-radius: 0px 0px 10px 0px;
 }
 
-.Button:hover {
-    background-color: rgb(234, 234, 234);
+.numberButton:hover {
+    background-color: rgb(252, 252, 252);
 }
 
 .operationButton {

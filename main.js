@@ -1,165 +1,99 @@
-const display = document.querySelector('#display');
-const zeroButton = document.querySelector('#zeroButton');
-const oneButton = document.querySelector('#oneButton');
-const twoButton = document.querySelector('#twoButton');
-const threeButton = document.querySelector('#threeButton');
-const fourButton = document.querySelector('#fourButton');
-const fiveButton = document.querySelector('#fiveButton');
-const sixButton = document.querySelector('#sixButton');
-const sevenButton = document.querySelector('#sevenButton');
-const eightButton = document.querySelector('#eightButton');
-const nineButton = document.querySelector('#nineButton');
-const acButton = document.querySelector('#acbutton');
-const onOffButton = document.querySelector('#onOffButton');
-const addButton = document.querySelector('#addButton');
-const subButton = document.querySelector('#subButton');
-const multiplyButton = document.querySelector('#multiplyButton');
-const divisionButton = document.querySelector('#divisionButton');
-const equalButton = document.querySelector('#equalButton');
-const commaButton = document.querySelector('#commaButton');
+const display = document.querySelector('.display');
+const backButton = document.querySelector('.backButton');
+const eraseButton = document.querySelector('.eraseButton');
+const commaButton = document.querySelector('.commaButton');
+const getNumbers = document.querySelectorAll('.numberButton');
+const getOperation = document.querySelectorAll('.operationButton');
+const exit = document.querySelector('.exit')
+const calculator = document.querySelector('.calculator')
 
-let calculate = 0;
-let commaBlock = false;
-
-oneButton.addEventListener('click', () => {
-    display.innerText += "1";
+exit.addEventListener('click', () => {
+    calculator.style.display = "none";
 });
 
-twoButton.addEventListener('click', () => {
-    display.innerText += "2";
-});
-
-threeButton.addEventListener('click', () => {
-    display.innerText += "3";
-});
-
-fourButton.addEventListener('click', () => {
-    display.innerText += "4";
-});
-
-fiveButton.addEventListener('click', () => {
-    display.innerText += "5";
-});
-
-sixButton.addEventListener('click', () => {
-    display.innerText += "6";
-});
-
-sevenButton.addEventListener('click', () => {
-    display.innerText += "7";
-});
-
-eightButton.addEventListener('click', () => {
-    display.innerText += "8";
-});
-
-nineButton.addEventListener('click', () => {
-    display.innerText += "9";
-});
-
-zeroButton.addEventListener('click', () => {
-    display.innerText += "0";
-});
-
-acButton.addEventListener('click', () => {
+backButton.addEventListener('click', () => {
     display.innerText = display.innerText.slice(0, -1);
 });
 
-onOffButton.addEventListener('click', () => {
+eraseButton.addEventListener('click', () => {
     display.innerText = "";
+    commaBlock = false;
 });
 
-addButton.addEventListener('click', () => {
-    if (display.innerText.length > 0) {
-        if (display.innerText.endsWith("+") || display.innerText.endsWith("-") || display.innerText.endsWith("/") || display.innerText.endsWith("*") || display.innerText.endsWith("%") || display.innerText.endsWith(".")) {
-            } else {
-                display.innerText += "+";
-                commaBlock = false;
-            }
+getNumbers.forEach(button => {
+    button.addEventListener('click', event => {
+        if (display.innerText.endsWith("%")) {
+        } else {
+            const clickedButton = event.target.textContent;
+            display.innerText += clickedButton;
         }
-    }
-);
+    });
+});
 
-subButton.addEventListener('click', () => {
-    if (display.innerText.length > 0) {
-        if (display.innerText.endsWith("+") || display.innerText.endsWith("-") || display.innerText.endsWith("/") || display.innerText.endsWith("*") || display.innerText.endsWith("%") || display.innerText.endsWith(".")) {
-            } else {
-                display.innerText += "-";
-                commaBlock = false;
-            }
+getOperation.forEach(button => {
+    button.addEventListener('click', event => {
+        const clickedButton = event.target.textContent;
+        if (clickedButton === "=") {
+            return result();
         }
-    }
-);
-
-multiplyButton.addEventListener('click', () => {
-    if (display.innerText.length > 0) {
-        if (display.innerText.endsWith("+") || display.innerText.endsWith("-") || display.innerText.endsWith("/") || display.innerText.endsWith("*") || display.innerText.endsWith("%") || display.innerText.endsWith(".")) {
-            } else {
-                display.innerText += "*";
-                commaBlock = false;
-            }
+        if (display.innerText.length > 0 && !endsWithOperator(display.innerText)) {
+            display.innerText += clickedButton;
+            commaBlock = false;
         }
-    }
-);
+    });
+});
 
-divisionButton.addEventListener('click', () => {
-    if (display.innerText.length > 0) {
-        if (display.innerText.endsWith("+") || display.innerText.endsWith("-") || display.innerText.endsWith("/") || display.innerText.endsWith("*") || display.innerText.endsWith("%") || display.innerText.endsWith(".")) {
-            } else {
-                display.innerText += "/";
-                commaBlock = false;
-            }
-        }
-    }
-);
+const endsWithOperator = (str) => {
+    return ["+", "-", "/", "*", "%", "."].some(op => str.endsWith(op));
+}
 
+let commaBlock = false;
 commaButton.addEventListener('click', () => {
     if (display.innerText.length > 0 && commaBlock === false) {
         if (display.innerText.endsWith("+") || display.innerText.endsWith("-") || display.innerText.endsWith("/") || display.innerText.endsWith("*") || display.innerText.endsWith("%") || display.innerText.endsWith(".")) {
-            } else {
-                display.innerText += ".";
-                commaBlock = true;
-            }
+        } else {
+            display.innerText += ".";
+            commaBlock = true;
         }
     }
+}
 );
 
-percentageButton.addEventListener('click', () => {
-    if (display.innerText.length > 0) {
-        if (display.innerText.endsWith("+") || display.innerText.endsWith("-") || display.innerText.endsWith("/") || display.innerText.endsWith("*") || display.innerText.endsWith("%") || display.innerText.endsWith(".")) {
-            } else {
-                display.innerText += "%";
-                commaBlock = false;
-            }
-        }
-    }
-);
+const removeZeros = () => {
+    display.innerText = display.innerText.replace(/\d+(\.\d+)?/g, function (match) {
+        return parseFloat(match).toFixed(3);
+    });
+}
 
-equalButton.addEventListener('click', () => {
-    
-    let removeUnnesesaryZeros = display.innerText.replace(/^0+/, "").replace(/\.?0+$/, "");
-    display.innerText = removeUnnesesaryZeros;
-
+const result = () => {
     if ((display.innerText).includes("%")) {
         return calculateWithPercentage();
     }
     if (display.innerText.length > 0) {
-        calculate = display.innerText;
-        display.innerText = eval(calculate.replace("%", "/100"));
-        commaBlock = true;
-    }
+        let preCalculate = display.innerText
+        removeZeros()
+        let result = Function("return " + display.innerText)();
+        display.innerText = result;
 
-});
+        if (result === Infinity) {
+            alert("No se puede Dividir por 0")
+            return display.innerText = preCalculate;
+        } else {
+            display.innerText = resultado;
+            commaBlock = true;
+        }
+    }
+}
 
 const calculateWithPercentage = () => {
-    let numeros = display.innerText;
-    let porcentaje = numeros.match(/\d+%/)[0];
-    let simbolo = numeros.match(/[-+*/]\d+%/)[0][0];
-    let porcentajeSinSimbolo = (porcentaje.replace("%", "")) / 100;
-    let porcentajeYsimbolo = simbolo + porcentaje;
-    let numerosSinPorcentaje = numeros.replace(porcentajeYsimbolo, "");
-    let calculo = eval(numerosSinPorcentaje);
-    let calculoFinal = (eval(calculo + simbolo + (porcentajeSinSimbolo * calculo)));
+    let numbers = display.innerText;
+    let percentage = numbers.match(/\d+%/)[0];
+    let symbol = numbers.match(/[-+*/]\d+%/)[0][0];
+    let percentageWithoutSymbol = (percentage.replace("%", "")) / 100;
+    let percentageWithSymbol = symbol + percentage;
+    let numberWithoutPercentage = numbers.replace(percentageWithSymbol, "");
+    let result = Function("return " + numberWithoutPercentage)();
+    let finalResult = Function("return " + (eval(result + symbol + (percentageWithoutSymbol * result))))();
     commaBlock = true;
-    display.innerText = calculoFinal;
+    display.innerText = finalResult;
 }

@@ -1,44 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora</title>
   <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
   <link rel="stylesheet" type="text/css" href="./styles/style.css" />
 </head>
 
 <body>
+  <h1 class="appTitle">ISDiMath</h1>
+
+  <div class="exitMessage">
+    <p>💚<br>Thanks for using ISDiMath! <br><br> See you next time!</p>
+  </div>
+
   <div class="calculator">
-    <div  class="text raw">
-      <p id="display" class="formText"></p>
+    <div class="text raw">
+      <button class="exit">ⓧ</button>
+      <p class="display formText"></p>
     </div>
     <div class="raw">
-      <input id="onOffButton"class="button actionButton" type="submit" value="⏻">
-      <input id="acButton" class="button actionButton acbutton" type="submit" value="←">
-      <input id="percentageButton"class="button actionButton" type="submit" value="%">
-      <input id="divisionButton" class="button operationButton" type="submit" value="/">
+      <button class="button actionButton eraseButton">A/C</button>
+      <button class="button actionButton backButton">←</button>
+      <button class="button operationButton">%</button>
+      <button class="button operationButton">/</button>
     </div>
     <div class="raw">
-      <input id="sevenButton" class="button numberButton" type="submit" value="7">
-      <input id="eightButton" class="button numberButton" type="submit" value="8">
-      <input id="nineButton" class="button numberButton" type="submit" value="9">
-      <input id="multiplyButton" class="button operationButton" type="submit" value="X">
+      <button class="button numberButton" value="7">7</button>
+      <button class="button numberButton">8</button>
+      <button class="button numberButton">9</button>
+      <button class="button operationButton multiplyButton">*</button>
     </div>
     <div class="raw">
-      <input id="fourButton" class="button numberButton" type="submit" value="4">
-      <input id="fiveButton" class="button numberButton" type="submit" value="5">
-      <input id="sixButton" class="button numberButton" type="submit" value="6">
-      <input id="subButton" class="button operationButton" type="submit" value="-">
+      <button class="button numberButton">4</button>
+      <button class="button numberButton">5</button>
+      <button class="button numberButton">6</button>
+      <button class="button operationButton subButton">-</button>
     </div>
     <div class="raw">
-      <input id="oneButton" class="button numberButton" type="submit" value="1">
-      <input id="twoButton" class="button numberButton" type="submit" value="2">
-      <input id="threeButton"class="button numberButton" type="submit" value="3">
-      <input id="addButton" class="button operationButton" type="submit" value="+">
+      <button class="button numberButton oneButton">1</button>
+      <button class="button numberButton twoButton">2</button>
+      <button class="button numberButton threeButton">3</button>
+      <button class="button operationButton addButton">+</button>
     </div>
     <div class="raw">
-      <input id="zeroButton" class="button zeroButton numberButton" type="submit" value="0">
-      <input id="commaButton" class="button numberButton" type="submit" value=",">
-      <input id="equalButton" class="button equalButton operationButton" type="submit" value="=">
+      <button class="button numberButton zeroButton" value="0">0</button>
+      <button class="button commaButton">,</button>
+      <button class="button equalButton operationButton">=</button>
     </div>
   </div>
   <script type="text/javascript" src="main.js"></script>
 </body>
+
+</html>
