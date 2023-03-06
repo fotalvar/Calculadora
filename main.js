@@ -1,23 +1,35 @@
 const display = document.querySelector('.display');
-const backButton = document.querySelector('.backButton');
+const negativeButton = document.querySelector('.negativeButton');
 const eraseButton = document.querySelector('.eraseButton');
 const commaButton = document.querySelector('.commaButton');
 const getNumbers = document.querySelectorAll('.numberButton');
 const getOperation = document.querySelectorAll('.operationButton');
-const exit = document.querySelector('.exit')
-const calculator = document.querySelector('.calculator')
+const exit = document.querySelector('.exit');
+const calculator = document.querySelector('.calculator');
+const messageBox = document.querySelector('.messageBox');
 
 exit.addEventListener('click', () => {
     calculator.style.display = "none";
 });
 
-backButton.addEventListener('click', () => {
-    display.innerText = display.innerText.slice(0, -1);
+negativeButton.addEventListener('click', () => {
+    let number = display.innerText
+    if (display.innerText === "") {
+        return;
+    }
+    if (number.charAt(0) === "-") {
+        number = number.slice(1);
+        display.innerText = number;
+        return;
+    } else {
+        number = "-" + number;
+        display.innerText = number;
+        return;
+    }
 });
 
 eraseButton.addEventListener('click', () => {
-    display.innerText = "";
-    commaBlock = false;
+    display.innerText = display.innerText.slice(0, -1);
 });
 
 getNumbers.forEach(button => {
@@ -47,6 +59,15 @@ const endsWithOperator = (str) => {
     return ["+", "-", "/", "*", "%", "."].some(op => str.endsWith(op));
 }
 
+
+const showMessage = () => {
+    messageBox.style.visibility = 'visible';
+    setTimeout(() => {
+        messageBox.style.visibility = 'hidden';
+    }, 4000);
+    return;
+};
+
 let commaBlock = false;
 commaButton.addEventListener('click', () => {
     if (display.innerText.length > 0 && commaBlock === false) {
@@ -69,17 +90,23 @@ const result = () => {
     if ((display.innerText).includes("%")) {
         return calculateWithPercentage();
     }
+    if (['+', '-', '*', '/', '.'].some(symbol => display.innerText.endsWith(symbol))) {
+        messageBox.textContent = " ⓧ No puede acabar tu operación con un símbolo. Modifícalo y vuelve a intentarlo."
+        showMessage();
+        return;
+    }
     if (display.innerText.length > 0) {
         let preCalculate = display.innerText
         removeZeros()
         let result = Function("return " + display.innerText)();
         display.innerText = result;
 
-        if (result === Infinity) {
-            alert("No se puede Dividir por 0")
+        if (!isFinite(result)) {
+            messageBox.textContent = "ⓧ No se puede dividir por 0"
+            showMessage();
             return display.innerText = preCalculate;
         } else {
-            display.innerText = resultado;
+            display.innerText = result;
             commaBlock = true;
         }
     }
@@ -87,13 +114,21 @@ const result = () => {
 
 const calculateWithPercentage = () => {
     let numbers = display.innerText;
-    let percentage = numbers.match(/\d+%/)[0];
-    let symbol = numbers.match(/[-+*/]\d+%/)[0][0];
-    let percentageWithoutSymbol = (percentage.replace("%", "")) / 100;
-    let percentageWithSymbol = symbol + percentage;
-    let numberWithoutPercentage = numbers.replace(percentageWithSymbol, "");
-    let result = Function("return " + numberWithoutPercentage)();
-    let finalResult = Function("return " + (eval(result + symbol + (percentageWithoutSymbol * result))))();
-    commaBlock = true;
-    display.innerText = finalResult;
+    const regex = /\d+(?:\.\d+)?%/;
+    if (regex.test(numbers)) {
+        let numberWithoutPercentage = parseFloat(numbers.substring(0, numbers.length - 1));
+        numberWithoutPercentage = numberWithoutPercentage / 100;
+        display.innerText = numberWithoutPercentage;
+        return;
+    } else {
+        let percentage = numbers.match(/\d+%/)[0];
+        let symbol = numbers.match(/[-+*/]\d+%/)[0][0];
+        let percentageWithoutSymbol = (percentage.replace("%", "")) / 100;
+        let percentageWithSymbol = symbol + percentage;
+        let numberWithoutPercentage = numbers.replace(percentageWithSymbol, "");
+        let result = Function("return " + numberWithoutPercentage)();
+        let finalResult = Function("return " + (eval(result + symbol + (percentageWithoutSymbol * result))))();
+        commaBlock = true;
+        display.innerText = finalResult;
+    }
 }

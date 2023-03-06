@@ -126,3 +126,13 @@
     background-color: #606278;
     border-color: #3d405b;
 }
+
+.messageBox {
+    visibility: hidden;
+    background-color: #fd9e8f;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+}
