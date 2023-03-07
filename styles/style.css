@@ -94,6 +94,10 @@
     color: #323441;
 }
 
+.button:hover {
+    background-color: rgb(252, 252, 252);
+}
+
 .zeroButton {
     width: 150px;
     border-radius: 0px 0px 0px 10px;
@@ -101,10 +105,6 @@
 
 .equalButton {
     border-radius: 0px 0px 10px 0px;
-}
-
-.numberButton:hover {
-    background-color: rgb(252, 252, 252);
 }
 
 .operationButton {
