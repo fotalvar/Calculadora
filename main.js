@@ -1,19 +1,24 @@
 const display = document.querySelector('.display');
-const negativeButton = document.querySelector('.negativeButton');
+const switchSignButton = document.querySelector('.switchSignButton');
 const eraseButton = document.querySelector('.eraseButton');
 const commaButton = document.querySelector('.commaButton');
 const getNumbers = document.querySelectorAll('.numberButton');
 const getOperation = document.querySelectorAll('.operationButton');
-const exit = document.querySelector('.exit');
 const calculator = document.querySelector('.calculator');
 const messageBox = document.querySelector('.messageBox');
+const exit = document.querySelector('.exit');
+let commaBlock = false;
 
 exit.addEventListener('click', () => {
     calculator.style.display = "none";
 });
 
-negativeButton.addEventListener('click', () => {
-    let number = display.innerText
+eraseButton.addEventListener('click', () => {
+    display.innerText = display.innerText.slice(0, -1);
+});
+
+switchSignButton.addEventListener('click', () => {
+    let number = display.innerText;
     if (display.innerText === "") {
         return;
     }
@@ -26,10 +31,6 @@ negativeButton.addEventListener('click', () => {
         display.innerText = number;
         return;
     }
-});
-
-eraseButton.addEventListener('click', () => {
-    display.innerText = display.innerText.slice(0, -1);
 });
 
 getNumbers.forEach(button => {
@@ -59,7 +60,6 @@ const endsWithOperator = (str) => {
     return ["+", "-", "/", "*", "%", "."].some(op => str.endsWith(op));
 }
 
-
 const showMessage = () => {
     messageBox.style.visibility = 'visible';
     setTimeout(() => {
@@ -68,10 +68,9 @@ const showMessage = () => {
     return;
 };
 
-let commaBlock = false;
 commaButton.addEventListener('click', () => {
     if (display.innerText.length > 0 && commaBlock === false) {
-        if (display.innerText.endsWith("+") || display.innerText.endsWith("-") || display.innerText.endsWith("/") || display.innerText.endsWith("*") || display.innerText.endsWith("%") || display.innerText.endsWith(".")) {
+        if (endsWithOperator(display.innerText)) {
         } else {
             display.innerText += ".";
             commaBlock = true;
