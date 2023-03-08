@@ -68,8 +68,7 @@ equalButton.addEventListener('click', () => {
             return;
         }
     }
-
-    firstNumber.innerText = result;
+    firstNumber.innerText = result.toFixed(2);
     secondNumber.innerText = "";
     operator.innerText = "";
 
