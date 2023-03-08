@@ -68,12 +68,16 @@ equalButton.addEventListener('click', () => {
             return;
         }
     }
-    firstNumber.innerText = result.toFixed(2);
+    
+    result = result.toFixed(2);
+    if (result.endsWith(".00")) {
+        result = result.toString().replace(/\.00$/, "")
+    }
+    firstNumber.innerText = result;
     secondNumber.innerText = "";
     operator.innerText = "";
 
 });
-
 percentageButton.addEventListener('click', event => {
     if (operator.innerText === "") {
         firstNumber.innerText = parseFloat(firstNumber.innerText / 100);
