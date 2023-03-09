@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
 
 body {
     background-color: #e5e5f7;
     opacity: 1;
     background-size: 20px 20px;
     background-image: repeating-linear-gradient(0deg, #d6d7ec, #d6d7ec 1px, #e5e5f7 1px, #e5e5f7);
+    font-family: 'Dosis', sans-serif;
+
 }
 
 .calculator {
@@ -28,7 +30,6 @@ body {
 
 .appTitle {
     text-align: center;
-    font-family: 'Quicksand', sans-serif;
 }
 
 .exitMessage {
@@ -42,7 +43,6 @@ body {
     padding: 20px;
     border-radius: 10px;
     background-color: #bec1dc;
-    font-family: 'Quicksand', sans-serif;
     box-shadow: 0px 10px 0px 0px #7487a3;
 }
 
@@ -65,7 +65,6 @@ body {
     gap: 10px;
     padding-right: 10px;
     font-size: 40px;
-    font-family: 'Quicksand', sans-serif;
     height: 60px;
     overflow: hidden;
 }
@@ -79,7 +78,6 @@ body {
     height: 20px;
     background: none;
     color: #676a85;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 18px;
     border: none;
     ;
@@ -99,7 +97,6 @@ body {
     border: none;
     color: white;
     font-size: 30px;
-    font-family: 'Quicksand', sans-serif;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -124,12 +121,12 @@ body {
     height: 75px;
     border-style: solid;
     border-width: 0.5px;
-    font-family: Verdana;
     font-size: 24px;
     background-color: #f4f1de;
     border-color: #e3e2d8;
-    font-family: 'Quicksand', sans-serif;
     color: #323441;
+    font-family: 'Dosis', sans-serif;
+    ;
 }
 
 .button:hover {
@@ -169,7 +166,6 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    font-family: 'Quicksand', sans-serif;
     font-size: 15px;
     color: white;
     transition: all 0.3s ease;
@@ -186,7 +182,7 @@ body {
 
 .commaButton:hover {
     background-color: rgb(252, 252, 252);
-    border-color: #e3e2d8; 
+    border-color: #e3e2d8;
 }
 
 .equalButton {

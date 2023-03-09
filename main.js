@@ -37,15 +37,26 @@ getNumbers.forEach(button => {
 
 getOperation.forEach(button => {
     button.addEventListener('click', event => {
+        const clickedButton = event.target.textContent;
         if (firstNumber.innerText === ("")) {
             return;
         }
-        const clickedButton = event.target.textContent;
+        if (secondNumber.innerText > 0) {
+            calculateResult()
+            operator.innerText = clickedButton;
+            return;
+        }
         operator.innerText = clickedButton;
     });
 });
 
+
 equalButton.addEventListener('click', () => {
+    calculateResult()
+    operator.innerText = "";
+});
+
+const calculateResult = () => {
     let firstNumberToOperate = firstNumber.innerText;
     let secondNumberToOperate = secondNumber.innerText;
     let operatorToOperate = operator.innerText;
@@ -68,16 +79,17 @@ equalButton.addEventListener('click', () => {
             return;
         }
     }
-    
+
     result = result.toFixed(2);
+
     if (result.endsWith(".00")) {
         result = result.toString().replace(/\.00$/, "")
     }
-    firstNumber.innerText = result;
+    
+    firstNumber.innerText = parseFloat(result);
     secondNumber.innerText = "";
-    operator.innerText = "";
+}
 
-});
 percentageButton.addEventListener('click', event => {
     if (operator.innerText === "") {
         firstNumber.innerText = parseFloat(firstNumber.innerText / 100);
